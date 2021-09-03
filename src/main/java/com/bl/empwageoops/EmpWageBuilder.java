@@ -1,38 +1,33 @@
 package com.bl.empwageoops;
 
 public class EmpWageBuilder {
-    int wagePerHrs=20;
-    int dailyWage;
-    int workHrs=0;
-    int totalempWage =0;
-    public static void main(String[] args) {
-        for(int day=1;day<=20;day++) {
-            int randomCheck = (int) (Math.floor(Math.random()*10)%3);
-            EmpWageBuilder obj=new EmpWageBuilder();
-            obj.wageCal(randomCheck);
+    int IS_FULL_TIME = 1;
+    int IS_PART_TIME = 2;
+    int EMP_RATE_PER_HR = 20;
+    int NUM_OF_WORKING_DAYS = 30;
+
+    public void employeeWage() {
+        int empHrs = 0;
+        int empWage = 0;
+        int totalEmpWage = 0;
+        for (int days = 1; days <= NUM_OF_WORKING_DAYS; days++) {
+            double empCheck = (Math.floor(Math.random() * 10) % 3);
+            if (empCheck == IS_FULL_TIME)
+                empHrs = 8;
+            else if (empCheck == IS_PART_TIME)
+                empHrs = 4;
+            else
+                empHrs = 0;
+
+            empWage = empHrs * EMP_RATE_PER_HR;
+            totalEmpWage += empWage;
+            System.out.println("Emp Wage is " + empWage);
         }
+        System.out.println("Total Emp Wage is " + totalEmpWage);
     }
 
-    public void wageCal(int randomCheck) {
-        int dailyWage = 0;
-
-        switch (randomCheck) {
-            case 1: {
-                workHrs = 4;
-                break;
-            }
-            case 2: {
-                workHrs = 8;
-                break;
-            }
-            default: {
-
-                workHrs = 0;
-            }
-        }
-            dailyWage = wagePerHrs * workHrs;
-            System.out.println("DailySalary:" + dailyWage);
-
-        }
-
+    public static void main(String[] args) {
+        EmpWageBuilder emp = new EmpWageBuilder();
+        emp.employeeWage();
+    }
 }
